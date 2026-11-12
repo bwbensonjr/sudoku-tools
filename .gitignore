@@ -4,3 +4,6 @@
 # p-diff build output and SRFI 64 test logs
 p-diff/build/
 *.log
+
+# Python virtual environments
+.venv/

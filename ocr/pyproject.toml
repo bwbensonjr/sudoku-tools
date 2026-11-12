@@ -1,0 +1,8 @@
+[project]
+name = "sudoku-ocr"
+version = "0.1.0"
+description = "Read a Sudoku puzzle from an image using a vision LLM"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.68",
+]
