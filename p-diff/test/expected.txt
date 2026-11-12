@@ -1,0 +1,15 @@
+5	Easy	naked-single	naked-single=51
+6	Easy	naked-single	naked-single=49
+9	Medium	pointing	naked-single=55 hidden-single=9 pointing=7
+10	Medium	pointing	naked-single=32 hidden-single=5 pointing=2
+13	Hard	naked-triple	naked-single=40 hidden-single=14 pointing=5 hidden-pair=1 naked-triple=1
+14	Hard	hidden-triple	naked-single=44 hidden-single=14 pointing=2 box-line=2 hidden-pair=1 hidden-triple=1
+15	Hard	naked-triple	naked-single=45 hidden-single=13 pointing=6 box-line=1 hidden-pair=2 naked-triple=2
+18	Expert	x-wing	naked-single=34 hidden-single=1 pointing=2 hidden-pair=1 x-wing=1
+19	Expert	x-wing	naked-single=48 hidden-single=3 pointing=5 naked-pair=1 hidden-pair=1 x-wing=1
+22	Unsolved	-	remaining=60
+23	Unsolved	box-line	naked-single=6 hidden-single=5 pointing=2 box-line=2 remaining=32
+26	Invalid	-	bad-format
+27	Invalid	-	bad-format
+30	Invalid	-	conflicting-givens
+33	Invalid	-	no-solution

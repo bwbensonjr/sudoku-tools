@@ -1,2 +1,6 @@
 *~
 .DS_Store
+
+# p-diff build output and SRFI 64 test logs
+p-diff/build/
+*.log
