@@ -1,7 +1,8 @@
 #!/bin/sh
 # Run every SRFI 64 suite in test/ with emit run, from the p-diff directory so
 # Emit resolves (p-diff ...) libraries from lib/.  Exits non-zero if any suite
-# fails.  The golden-output comparison is appended below the suites.
+# fails.  The golden-output comparison and the calibration check follow the
+# suites.
 cd "$(dirname "$0")/.." || exit 2
 EMIT="${EMIT:-emit}"
 status=0
@@ -31,5 +32,12 @@ else
         echo "FAILED: output differs from test/expected.txt"
         status=1
     fi
+fi
+
+# Calibration: rated levels must match the human labels in test/calibrate-*.csv.
+echo "== calibration: test/calibrate.sh"
+if ! ./test/calibrate.sh; then
+    echo "FAILED: calibration levels differ from their labels"
+    status=1
 fi
 exit $status

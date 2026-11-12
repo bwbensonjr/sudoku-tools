@@ -11,12 +11,14 @@
 (test-equal "level table covers the technique table"
   technique-names (map car level-table))
 
-(test-equal "singles-only puzzle is Easy" "Easy"
+(test-equal "naked-singles-only puzzle is Easy" "Easy"
   (result-level (solve-line "530070000600195000098000060800060003400803001700020006060000280000419005000080079")))
-(test-equal "pointing puzzle is Medium" "Medium"
+(test-equal "hidden-single puzzle is Medium" "Medium"
+  (result-level (solve-line "009003200000040007060900400080500000000701000530020000600005700010000058350800040")))
+(test-equal "pointing puzzle is Hard" "Hard"
   (result-level (solve-line "400000938032094100095300240370609004529001673604703090957008300003900400240030709")))
-(test-equal "naked-pair hardest is Medium" "Medium" (technique-level 'naked-pair))
-(test-equal "triple puzzle is Hard" "Hard"
+(test-equal "naked-pair hardest is Expert" "Expert" (technique-level 'naked-pair))
+(test-equal "triple puzzle is Expert" "Expert"
   (result-level (solve-line "000000000231090000065003100008924000100050006000136700009300570000010843000000000")))
 (test-equal "x-wing puzzle is Expert regardless of easier counts" "Expert"
   (result-level (solve-line "100000569492056108056109240009640801064010000218035604040500016905061402621000005")))

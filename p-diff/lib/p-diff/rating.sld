@@ -5,16 +5,17 @@
           report-line invalid-line)
   (begin
     ;; Technique name -> level.  Must name the same techniques as
-    ;; technique-table, which test/rating-test.scm checks.
+    ;; technique-table, which test/rating-test.scm checks.  Calibrated
+    ;; against the human labels in test/calibrate-*.csv (test/calibrate.sh).
     (define level-table
       '((naked-single . "Easy")
-        (hidden-single . "Easy")
-        (pointing . "Medium")
-        (box-line . "Medium")
-        (naked-pair . "Medium")
-        (hidden-pair . "Medium")
-        (naked-triple . "Hard")
-        (hidden-triple . "Hard")
+        (hidden-single . "Medium")
+        (pointing . "Hard")
+        (box-line . "Hard")
+        (naked-pair . "Expert")
+        (hidden-pair . "Expert")
+        (naked-triple . "Expert")
+        (hidden-triple . "Expert")
         (x-wing . "Expert")))
 
     (define (technique-level name) (cdr (assq name level-table)))

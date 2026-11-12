@@ -9,16 +9,29 @@ prints for each puzzle, and what exit status it returns.
 
 ### Requirement: Level from hardest technique
 A solved puzzle's level SHALL be set by the hardest technique applied: Easy for
-`naked-single` and `hidden-single`; Medium for `pointing`, `box-line`, `naked-pair`,
-and `hidden-pair`; Hard for `naked-triple` and `hidden-triple`; Expert for `x-wing`.
+`naked-single`; Medium for `hidden-single`; Hard for `pointing` and `box-line`;
+Expert for `naked-pair`, `hidden-pair`, `naked-triple`, `hidden-triple`, and
+`x-wing`.
+
+#### Scenario: Naked-singles-only puzzle
+- **WHEN** a puzzle is solved using only naked singles
+- **THEN** its level is `Easy`
 
 #### Scenario: Singles-only puzzle
-- **WHEN** a puzzle is solved using only naked and hidden singles
-- **THEN** its level is `Easy`
+- **WHEN** a puzzle is solved using only naked and hidden singles, with at least one hidden single
+- **THEN** its level is `Medium`
+
+#### Scenario: Locked candidates needed
+- **WHEN** the hardest technique a solve applied is `box-line`
+- **THEN** its level is `Hard`
 
 #### Scenario: Pair needed
 - **WHEN** the hardest technique a solve applied is `naked-pair`
-- **THEN** its level is `Medium`
+- **THEN** its level is `Expert`
+
+#### Scenario: Triple needed
+- **WHEN** the hardest technique a solve applied is `hidden-triple`
+- **THEN** its level is `Expert`
 
 #### Scenario: X-Wing needed
 - **WHEN** a solve applied `x-wing` at least once
@@ -40,7 +53,7 @@ techniques never applied.
 
 #### Scenario: Solved puzzle report
 - **WHEN** the puzzle on line 1 is solved with 30 naked singles, 21 hidden singles, and 2 naked pairs
-- **THEN** the output line is `1<TAB>Medium<TAB>naked-pair<TAB>naked-single=30 hidden-single=21 naked-pair=2`
+- **THEN** the output line is `1<TAB>Expert<TAB>naked-pair<TAB>naked-single=30 hidden-single=21 naked-pair=2`
 
 #### Scenario: Unsolved puzzle report
 - **WHEN** the puzzle on line 4 stalls with 40 empty cells after 5 naked singles

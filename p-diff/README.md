@@ -83,16 +83,33 @@ puzzle is `Unsolved`.
 | Technique       | Level  |
 |-----------------|--------|
 | `naked-single`  | Easy   |
-| `hidden-single` | Easy   |
-| `pointing`      | Medium |
-| `box-line`      | Medium |
-| `naked-pair`    | Medium |
-| `hidden-pair`   | Medium |
-| `naked-triple`  | Hard   |
-| `hidden-triple` | Hard   |
+| `hidden-single` | Medium |
+| `pointing`      | Hard   |
+| `box-line`      | Hard   |
+| `naked-pair`    | Expert |
+| `hidden-pair`   | Expert |
+| `naked-triple`  | Expert |
+| `hidden-triple` | Expert |
 | `x-wing`        | Expert |
 
 A solved puzzle's level is the level of the hardest technique it needed.
+Because the solver tries naked singles before hidden singles, a puzzle is
+`Easy` only if naked singles alone solve it.
+
+### Calibration
+
+The levels are tuned against puzzles that a person has already labeled. Each
+`test/calibrate-*.csv` file has a `puzzle,level` header, then one puzzle and
+its label (`Easy`, `Medium`, `Hard`, or `Expert`) per row. `make test` runs
+`test/calibrate.sh`, which rates every puzzle and fails if any level differs
+from its label:
+
+```sh
+test/calibrate.sh                     # every test/calibrate-*.csv
+test/calibrate.sh path/to/other.csv   # check another labeled set
+```
+
+`test/calibration-sources.md` records where each calibration file came from.
 
 ### Invalid puzzles
 
@@ -120,5 +137,6 @@ lib/p-diff/grid.sld         cells, units, peers, solve state, parsing
 lib/p-diff/techniques.sld   the nine techniques, in order
 lib/p-diff/solver.sld       simplest-first solve loop, contradiction checks
 lib/p-diff/rating.sld       levels and report lines
-test/                       SRFI 64 suites, fixture puzzles, golden output
+test/                       SRFI 64 suites, fixture puzzles, golden output,
+                            calibration sets and check
 ```
