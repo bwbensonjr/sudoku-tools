@@ -16,7 +16,7 @@
           remove-candidate! place! empty-cell-count
           char->digit trim-string
           parse-puzzle conflicting-givens? initial-state
-          state-from-strings)
+          state-from-strings grid->string print-grid)
   (begin
     (define (cell-row c) (quotient c 9))
     (define (cell-col c) (remainder c 9))
@@ -176,4 +176,37 @@
         (for-each (lambda (entry)
                     (vector-set! (state-candidates s) (car entry) (cdr entry)))
                   cands)
-        s))))
+        s))
+
+    ;; Render a vector of 81 values (0 for empty) as a 9x9 text grid, with
+    ;; empty cells shown as `.` and lines between the 3x3 boxes:
+    ;;
+    ;;   5 3 . | . 7 . | . . .
+    ;;   6 . . | 1 9 5 | . . .
+    ;;   . 9 8 | . . . | . 6 .
+    ;;   ------+-------+------
+    ;;   ...
+    (define (grid->string values)
+      (let ((out (open-output-string)))
+        (let loop ((c 0))
+          (when (< c 81)
+            (let ((r (cell-row c))
+                  (col (cell-col c))
+                  (d (vector-ref values c)))
+              (when (and (= col 0) (> r 0) (= 0 (remainder r 3)))
+                (write-string "------+-------+------\n" out))
+              (cond ((= col 0))
+                    ((= 0 (remainder col 3)) (write-string " | " out))
+                    (else (write-char #\space out)))
+              (if (= d 0)
+                  (write-char #\. out)
+                  (write-string (number->string d) out))
+              (when (= col 8) (newline out)))
+            (loop (+ c 1))))
+        (get-output-string out)))
+
+    ;; Print a vector of 81 values as a text grid to `port` (default: the
+    ;; current output port).
+    (define (print-grid values . port)
+      (write-string (grid->string values)
+                    (if (null? port) (current-output-port) (car port))))))

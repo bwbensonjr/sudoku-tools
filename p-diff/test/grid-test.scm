@@ -79,6 +79,22 @@
 (test-assert "place removes digit from row peer" (not (memv 6 (candidates-of s2 5))))
 (test-equal "copy is independent" 0 (value-of s 3))
 
+;; grid->string
+(test-equal "grid->string renders the classic puzzle"
+  (string-append
+   "5 3 . | . 7 . | . . .\n"
+   "6 . . | 1 9 5 | . . .\n"
+   ". 9 8 | . . . | . 6 .\n"
+   "------+-------+------\n"
+   "8 . . | . 6 . | . . 3\n"
+   "4 . . | 8 . 3 | . . 1\n"
+   "7 . . | . 2 . | . . 6\n"
+   "------+-------+------\n"
+   ". 6 . | . . . | 2 8 .\n"
+   ". . . | 4 1 9 | . . 5\n"
+   ". . . | . 8 . | . 7 9\n")
+  (grid->string (parse-puzzle classic)))
+
 (let ((fails (test-runner-fail-count (test-runner-current))))
   (test-end "grid")
   (exit (if (= fails 0) 0 1)))
